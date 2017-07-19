@@ -55,16 +55,11 @@
 		<node id="trig_cnt" address="0x1"/>
 	</node>
 	<node id="hist" module="file://state_history.xml" address="0xc"/>
-	<node id="cmd_ctrs" address="0x10" description="TTC command counters" fwinfo="endpoint;width=3">
-		<node id="bc0_ctr" address="0x0"/>
-		<node id="ec0_ctr" address="0x1"/>
-		<node id="resync_ctr" address="0x2"/>
-		<node id="oc0_ctr" address="0x3"/>
-		<node id="test_sync_ctr" address="0x4"/>
-		<node id="start_ctr" address="0x5"/>
-		<node id="stop_ctr" address="0x6"/>
+	<node id="cmd_ctrs" address="0x10" description="TTC command counters" fwinfo="endpoint;width=1">
+		<node id="ctr_sel" address="0x0"/>
+		<node id="ctr" address="0x1"/>
 	</node>
-	<node id="tmt" address="0x18" description="TMT cycle control" fwinfo="endpoint;width=0">
+	<node id="tmt" address="0x12" description="TMT cycle control" fwinfo="endpoint;width=0">
 		<node id="max_phase" mask="0xf"/>
 		<node id="phase" mask="0xf0"/>
 		<node id="l1a_offset" mask="0xf00"/>

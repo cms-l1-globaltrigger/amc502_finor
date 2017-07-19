@@ -31,9 +31,8 @@
 	</node>
 	<node id="mode_csr" address="0x10" description="Ctrl/Status of each readout control mode" fwinfo="endpoint;width=3">
 		<node id="ctrl" address="0x0">
-			<node id="evt_size" mask="0xffff"/>
-			<node id="evt_trig" mask="0xff0000"/>
-			<node id="token_delay" mask="0x7f000000"/>
+			<node id="evt_size" mask="0xfffff"/>
+			<node id="evt_trig" mask="0xff00000"/>
 		</node>
 		<node id="hdr" address="0x1">
 			<node id="event_type" mask="0xffff"/>

@@ -57,13 +57,9 @@
 		<node id="oos_ctr_l" address="0x8"/>
 		<node id="oos_ctr_h" address="0x9"/>		
 	</node>
-	<node id="zp" address="0x30" description="Formatting for the readout buffer" fwinfo="endpoint;width=1">
-		<node id="ctrl" address="0x0">
-			<node id="en" mask="0x0"/>
-		</node>
-	</node>
 	<node id="evt_check" address="0x32" description="Check the number of events passing through" fwinfo="endpoint;width=1">
 		<node id="evt_err" address="0x1"/>
-	</node>	
-	<node id="readout_control" module="file://mp7_readout_control.xml" address="0x40"/>
+	</node>
+	<node id="readout_zs" module="file://mp7_readout_zs.xml" address="0x40"/>
+	<node id="readout_control" module="file://mp7_readout_control.xml" address="0x80"/>
 </node>
