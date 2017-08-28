@@ -1,5 +1,5 @@
 <node description="AMC502 finor - payload registers" fwinfo="endpoint">
-  
+
 <!--HB 2016-09-01: lemo_out_sel used only for tests not in SWATCH-->
 <!--    <node id="lemo_out_sel" address="0x00" description="Selection of signals to LEMO outputs (to TCDS)">
         <node id="lemo_0" address="0x00" mask="0x000000ff" permission="rw"/>
@@ -7,7 +7,7 @@
         <node id="lemo_2" address="0x00" mask="0x00ff0000" permission="rw"/>
         <node id="lemo_3" address="0x00" mask="0xff000000" permission="rw"/>
     </node>-->
-    
+
     <node id="input_masks" address="0x01" description="Masking finor and veto inputs">
         <node id="module_0" address="0x00" mask="0x00000001" permission="rw"/> <!-- Disables input, when written 1 -->
         <node id="module_1" address="0x00" mask="0x00000002" permission="rw"/>
@@ -16,7 +16,7 @@
         <node id="module_4" address="0x00" mask="0x00000010" permission="rw"/>
         <node id="module_5" address="0x00" mask="0x00000020" permission="rw"/>
     </node>
-    
+
     <node id="spytrig_ctrl" address="0x0d" description="Control Regs for Spytrigger">
         <node id="orbit_nr_l" address="0x00" mask="0xffffffff" permission="rw"/>
         <node id="orbit_nr_h" address="0x01" mask="0x0000ffff" permission="rw"/>
@@ -62,5 +62,5 @@
     <node id="rate_cnt_loc_finor" address="0xC8" mode="incremental" size="6" permission="r" description="Rate counter for local finor"/>
 <!--    <node id="rate_cnt_loc_veto" address="0xD0" mode="incremental" size="6" permission="r" description="Rate counter for local veto"/>-->
     <node id="rate_cnt_loc_veto" address="0xD8" mode="incremental" size="6" permission="r" description="Rate counter for local veto"/>
-    <node id="spymem" address="0x01000000" description="Spy memory" mode="incremental" size="4096" permission="r" parameters="foo=bar;type=mem;class=ExtCondMemoryImage" description="Memory for spying the input signals"/>
+    <node id="spymem" address="0x01000000" description="Spy memory" mode="incremental" size="4096" permission="r" parameters="type=mem;class=FinorMemoryImage" description="Memory for spying the input signals"/>
 </node>
