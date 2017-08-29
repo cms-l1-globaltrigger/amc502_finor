@@ -62,5 +62,5 @@
     <node id="rate_cnt_loc_finor" address="0xC8" mode="incremental" size="6" permission="r" description="Rate counter for local finor"/>
 <!--    <node id="rate_cnt_loc_veto" address="0xD0" mode="incremental" size="6" permission="r" description="Rate counter for local veto"/>-->
     <node id="rate_cnt_loc_veto" address="0xD8" mode="incremental" size="6" permission="r" description="Rate counter for local veto"/>
-    <node id="spymem" address="0x01000000" description="Spy memory" mode="incremental" size="4096" permission="r" parameters="type=mem;class=FinorMemoryImage" description="Memory for spying the input signals"/>
+    <node id="spymem" address="0x01000000" description="Spy memory" mode="incremental" size="4096" permission="r" parameters="type=mem;class=Finor502MemoryImage" description="Memory for spying the input signals"/>
 </node>
