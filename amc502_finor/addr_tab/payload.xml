@@ -52,6 +52,7 @@
         <node id="luminosity_seg_nr"            address="0x0000001A" mask="0xffffffff" permission="r"/>
     </node>
     <node id="reset" address="0xA0" mask="0x00000001" description="Pulse reg for reset-pulse"/>
+    <node id="counter_reset" address="0xA0" mask="0x00000002" description="Pulse reg for counter reset-pulse"/>
     <node id="spy12_once_event" address="0xA0" mask="0x00000004" description="Triggers a spy event for a specific orbit"/>
     <node id="spy12_next_event" address="0xA0" mask="0x00000008" description="Triggers a spy event for the next orbity"/>
 <!--    <node id="spy_once_event" address="0xA0" mask="0x00000004" description="Pulse reg for spy-mem"/>
