@@ -1,0 +1,1 @@
+src --cd ../ucf impl_settings.tcl pins.tcl clock_constraints.tcl area_constraints.tcl mp7_mgt.tcl

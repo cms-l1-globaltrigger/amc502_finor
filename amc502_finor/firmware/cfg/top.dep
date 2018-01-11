@@ -1,0 +1,6 @@
+include source.dep
+?toolset=="ISE"? src --cd ../ucf mp7_mgt.ucf
+include -c boards/mp7/base_fw/mp7_690es
+src top_decl.vhd
+src -c boards/mp7/base_fw/common mp7_top_decl.vhd
+src -c boards/mp7/base_fw/mp7_690es mp7_brd_decl.vhd

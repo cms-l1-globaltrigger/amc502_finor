@@ -1,0 +1,21 @@
+@device_family = "kintex7"
+@device_name = "xc7k420t"
+@device_package = "ffg1156"
+@device_speed = "-2"
+@boardname = "mp7_690es"
+
+setup -c boards/mp7/base_fw/common settings_v7.vivado.tcl
+include -c boards/mp7/base_fw/common constraints_r1.dep
+
+src mp7_690es.vhd mp7_brd_decl.vhd
+src -c components/ipbus_core ipbus_package.vhd
+src -c components/mp7_datapath mp7_data_types.vhd
+src -c components/mp7_readout mp7_readout_decl.vhd
+src -c components/mp7_ttc mp7_ttc_decl.vhd
+include -c components/mp7_infra
+include -c components/ipbus_eth k7_420.dep
+include -c components/mp7_ctrl
+include -c components/mp7_ttc
+include -c components/mp7_datapath mp7_datapath_gth.dep
+include -c components/mp7_readout
+include -c components/mp7_mezzanine

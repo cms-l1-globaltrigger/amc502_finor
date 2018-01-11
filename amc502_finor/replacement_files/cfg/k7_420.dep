@@ -1,0 +1,19 @@
+# Dependencies for the ethernet gubbins on a v7 '485 part
+
+src eth_7s_1000basex_gtx.vhd emac_hostbus_decl.vhd
+src ../gen_hdl/gig_eth_pcs_pma_v11_4/gig_eth_pcs_pma_v11_4_transceiver.vhd
+src ../gen_hdl/gig_eth_pcs_pma_v11_4/gig_eth_pcs_pma_v11_4_reset_sync.vhd
+src ../gen_hdl/gig_eth_pcs_pma_v11_4/gig_eth_pcs_pma_v11_4_sync_block.vhd
+src ../gen_hdl/gig_eth_pcs_pma_v11_4/gig_eth_pcs_pma_v11_4_block.vhd
+src ../gen_hdl/gtwizard_v2_3_gbe/gtwizard_v2_3_gbe_init.vhd
+src ../gen_hdl/gtwizard_v2_3_gbe/gtwizard_v2_3_gbe_tx_startup_fsm.vhd
+src ../gen_hdl/gtwizard_v2_3_gbe/gtwizard_v2_3_gbe_rx_startup_fsm.vhd
+src ../gen_hdl/gtwizard_v2_3_gbe/gtwizard_v2_3_gbe_recclk_monitor.vhd
+src ../gen_hdl/gtwizard_v2_3_gbe/gtwizard_v2_3_gbe.vhd
+src ../gen_hdl/gtwizard_v2_3_gbe/gtwizard_v2_3_gbe_gt.vhd
+src ../cgn/gig_eth_pcs_pma_v11_4.xco
+src -n ../cgn/gtwizard_v2_3_gbe.xco
+src ../cgn/tri_mode_eth_mac_v5_5.xco
+?toolset=="Vivado"? src ../ngc/gig_eth_pcs_pma_v11_4.ngc
+?toolset=="Vivado"? src ../ngc/tri_mode_eth_mac_v5_5.ngc
+

@@ -1,0 +1,23 @@
+##?toolset=="Vivado"? src ../ucf/mp7_payload.tcl
+##?toolset=="Vivado"? src ../ucf/mp7_null_algo.tcl
+#
+src math_pkg.vhd
+src gt_mp7_core_pkg.vhd
+src bgo_sync.vhd
+src algo_rate_counter.vhd
+src ipbus_decode_mp7_payload.vhd
+src spytrig.vhd
+src tcm.vhd
+src user_package.vhd
+src user_switch.vhd
+src mp7_payload.vhd
+src ipb_slaves/ipb_pulse_regs.vhd
+src ipb_slaves/ipb_dpmem_4096_32.vhd
+
+src -c components/ipbus_slaves ipbus_reg_v.vhd
+src -c components/ipbus_core ipbus_fabric_sel.vhd
+src -c components/mp7_ttc mp7_ttc_decl.vhd
+src -c boards/mp7/base_fw/common mp7_top_decl.vhd
+
+#src ../cgn/blk_mem_gen_0/synth/blk_mem_gen_0.vhd
+?toolset=="Vivado"? src ../cgn/blk_mem_gen_0/blk_mem_gen_0.xci
