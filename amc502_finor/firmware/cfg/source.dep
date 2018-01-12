@@ -1,5 +1,6 @@
 ##?toolset=="Vivado"? src ../ucf/mp7_payload.tcl
-##?toolset=="Vivado"? src ../ucf/mp7_null_algo.tcl
+## HB 2018-01-12: inserted mp7_null_algo.tcl because of constraints for IOB.
+?toolset=="Vivado"? src ../ucf/mp7_null_algo.tcl
 #
 src math_pkg.vhd
 src gt_mp7_core_pkg.vhd
