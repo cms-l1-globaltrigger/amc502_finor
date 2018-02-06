@@ -11,8 +11,8 @@ use work.mp7_top_decl.all;
 
 package top_decl is
 
-        constant ALGO_REV: std_logic_vector(31 downto 0) := X"00002002";
-        constant BUILDSYS_BUILD_TIME: std_logic_vector(31 downto 0) := X"5a586f55";
+        constant ALGO_REV: std_logic_vector(31 downto 0) := X"00001016";
+        constant BUILDSYS_BUILD_TIME: std_logic_vector(31 downto 0) := X"5a78506d";
         constant TOP_USERNAME : std_logic_vector(32*8-1 downto 0)  := X"0000000000000000000000000000000000000000000000007265756167726562";
         constant BUILDSYS_BLAME_HASH: std_logic_vector(31 downto 0) := TOP_USERNAME(31 downto 0);
 	
