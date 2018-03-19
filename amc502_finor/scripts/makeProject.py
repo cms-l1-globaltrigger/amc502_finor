@@ -1,6 +1,8 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
+import toolbox as tb
+
 import argparse
 import datetime
 import urllib
@@ -184,88 +186,79 @@ def main():
     # Feth current timestamp.
     timestamp = get_timestamp()
 
-    fw_build_dir = os.path.join(args.path, "{}_{}".format(BOARD_TYPE, FW_TYPE))
+    # Compile build root directory
+    project_type = "{}_{}".format(BOARD_TYPE, FW_TYPE)
+    build_name = "0x{}".format(args.build)
+    build_root = os.path.join(args.path, project_type, build_name)
+
+    #fw_build_dir = os.path.join(args.path, "{}_{}".format(BOARD_TYPE, FW_TYPE))
+
+    if os.path.isdir(build_root):
+        raise RuntimeError("build area alredy exists: {}".format(build_root))
 
     logging.info("Creating uGT build area...")
     logging.info("tag: %s (%s)", args.tag, "unstable" if args.unstable else "stable")
     logging.info("user: %s", args.user)
-    logging.info("path: %s", fw_build_dir)
+    logging.info("path: %s", build_root)
     logging.info("build: 0x%s", args.build)
     logging.info("board type: %s", args.board)
 
-    mp7path = os.path.join(fw_build_dir, args.tag)
+    # MP7 tag path inside build root directry.
+    # mp7path: /home/user/work/fwdir/0x1234/mp7_v1_2_3
+    mp7path = os.path.join(build_root, args.tag)
 
     #
     # Create build area
     #
+    logging.info("creating directory %s", mp7path)
+    os.makedirs(mp7path)
 
-    if not os.path.isdir(mp7path):
+    # Check out mp7fw
+    os.chdir(mp7path)
 
-        logging.info("creating directory %s", mp7path)
-        os.makedirs(mp7path)
+    logging.info("downloading project manager...")
+    filename = "ProjectManager.py"
+    # Remove existing file.
+    tb.remove(filename)
+    # Download file
+    release_mode = 'unstable' if args.unstable else 'stable'
+    url = "https://svnweb.cern.ch/trac/cactus/browser/tags/mp7/{release_mode}/firmware/{args.tag}/cactusupgrades/scripts/firmware/ProjectManager.py?format=txt".format(**locals())
+    logging.info("retrieving %s", url)
+    urllib.urlretrieve(url, filename)
+    tb.make_executable(filename)
 
-        # Check out mp7fw
-        cwd = os.getcwd()
-        os.chdir(mp7path)
+    # Pffff....
+    d = open(filename).read()
+    d = d.replace(', default=os.getlogin()', '')
+    with open(filename, 'wb') as fp:
+        fp.write(d)
 
-        logging.info("downloading project manager...")
-        filename = "ProjectManager.py"
-        # Remove existing file.
-        remove_file(filename)
-        # Download file
-        release_mode = 'unstable' if args.unstable else 'stable'
-        url = "https://svnweb.cern.ch/trac/cactus/browser/tags/mp7/{release_mode}/firmware/{args.tag}/cactusupgrades/scripts/firmware/ProjectManager.py?format=txt".format(**locals())
-        logging.info("retrieving %s", url)
-        urllib.urlretrieve(url, filename)
-        make_executable(filename)
-
-        logging.info("checkout MP7 base firmware...")
-        path = os.path.join('tags', 'mp7', 'unstable' if args.unstable else 'stable', 'firmware', args.tag)
-        if args.old:
-            subprocess.check_call(['python', 'ProjectManager.py', 'checkout', path, '-u', args.user])
-        else:
-            subprocess.check_call(['python', 'ProjectManager.py', 'create', path, '-u', args.user]) #changes in ProjectManager.py, have to differ between older and newer versions
-
-        os.chdir(fw_build_dir)
-
-        logging.info("creating link to current tag: mp7fw_current -> %s", mp7path)
-        mp7currDir = 'mp7fw_current'
-        remove_file(mp7currDir)
-        os.symlink(mp7path, mp7currDir)
-        mp7currPath = os.path.join(fw_build_dir, mp7currDir)
-
-        os.chdir(mp7path)
-
-        # Copy changed MP7 files to project
-        src_sub_dir = '../replacement_files/'
-
-        for source, dest in replace_file_list:
-          src_path = os.path.abspath(os.path.join(scripts_dir, src_sub_dir, source))
-          dest_path = os.path.abspath(os.path.join(mp7path, 'cactusupgrades', dest))
-          shutil.copy(src_path, dest_path)
-
-        logging.info("Sucessfully patched files for AMC502 Finor.")
-
-        os.chdir(mp7currPath)
-
+    logging.info("checkout MP7 base firmware...")
+    path = os.path.join('tags', 'mp7', 'unstable' if args.unstable else 'stable', 'firmware', args.tag)
+    if args.old:
+        subprocess.check_call(['python', 'ProjectManager.py', 'checkout', path, '-u', args.user])
     else:
+        subprocess.check_call(['python', 'ProjectManager.py', 'create', path, '-u', args.user]) #changes in ProjectManager.py, have to differ between older and newer versions
 
-        # included in the else, to preserve the path structure
-        os.chdir(fw_build_dir)
-        ######################################################
-
-        logging.info("creating link to current tag: mp7fw_current -> %s", mp7path)
-        mp7currDir = 'mp7fw_current'
-        remove_file(mp7currDir)
-        os.symlink(mp7path, mp7currDir)
-        mp7currPath = os.path.join(fw_build_dir, mp7currDir)
-
-        os.chdir(mp7currPath)
-
-        ######################################################
+    # Remove unused boards
+    logging.info("removing unused boards...")
+    boards_dir = os.path.join(mp7path,'cactusupgrades', 'boards')
+    for board in os.listdir(boards_dir):
+        if board != 'mp7':
+            tb.remove(os.path.join(boards_dir, board))
 
     cwd = os.getcwd()
     os.chdir(mp7path)
+
+    # Copy changed MP7 files to project
+    src_sub_dir = '../replacement_files/'
+
+    for source, dest in replace_file_list:
+      src_path = os.path.abspath(os.path.join(scripts_dir, src_sub_dir, source))
+      dest_path = os.path.abspath(os.path.join(mp7path, 'cactusupgrades', dest))
+      shutil.copy(src_path, dest_path)
+
+    logging.info("Sucessfully patched files for AMC502 Finor.")
 
     #
     #  Patching top VHDL
@@ -276,8 +269,8 @@ def main():
     #
     #  Creating build areas
     #
-    logging.info("creating build area...")
-    build_area_dir = ''.join(('build_0x', args.build))
+    logging.info("creating build areas...")
+    build_area_dir = 'build'
 
     if os.path.isdir(build_area_dir):
         raise RuntimeError("build area alredy exists: {build_area_dir}".format(**locals()))
@@ -320,8 +313,11 @@ def main():
     config.set('device', 'alias', BoardAliases[args.board])
 
     # Writing our configuration file to 'example.cfg'
-    with open('.'.join((build_area_dir, 'cfg')), 'wb') as configfile:
-        config.write(configfile)
+    with open('build_0x{}.cfg'.format(args.build), 'wb') as fp:
+        config.write(fp)
+    ## Writing our configuration file to 'example.cfg'
+    #with open('.'.join((build_area_dir, 'cfg')), 'wb') as configfile:
+        #config.write(configfile)
 
     logging.info("AMC502 Finor project maker finished with success.")
 

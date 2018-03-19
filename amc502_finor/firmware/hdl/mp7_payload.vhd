@@ -351,7 +351,10 @@ begin
         end loop;
     end process;
 
-    spytrig_i.orbit_nr                <= X"0000" & module_info_control_regs(14)(15 downto 0) & module_info_control_regs(13);
+-- HB 2018-03-19: changed "spytrig_i.orbit_nr" assignment, because of error Vivado 2017.4 (but not with 2017.1) => 
+
+--     spytrig_i.orbit_nr                <= X"0000" & module_info_control_regs(14)(15 downto 0) & module_info_control_regs(13);
+    spytrig_i.orbit_nr                <= module_info_control_regs(14)(15 downto 0) & module_info_control_regs(13);
     spytrig_i.spy12_once_event        <= pulse(2);
     spytrig_i.spy12_next_event        <= pulse(3);
     spytrig_i.clear_spy12_ready_event <= module_info_control_regs(15)(3);

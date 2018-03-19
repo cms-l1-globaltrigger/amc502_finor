@@ -51,7 +51,7 @@ def main():
     buildarea = config.get('firmware', 'buildarea')
     timestamp = get_timestamp()
 
-    basename = "{fw_type}_{board}_v{build}".format(**locals())
+    basename = "{board}_{fw_type}_v{build}".format(**locals())
     basepath = os.path.dirname(args.config)
     # Custom output directory?
     if args.outdir:
@@ -67,7 +67,7 @@ def main():
     os.makedirs(build_dir)
     os.makedirs(log_dir)
     shutil.copy(os.path.join(buildarea, 'top', 'top.runs', 'impl_1', 'top.bit'),
-        os.path.join(build_dir, '{fw_type}_{board}_v{build}.bit'.format(**locals())))
+        os.path.join(build_dir, '{board}_{fw_type}_v{build}.bit'.format(**locals())))
     shutil.copy(os.path.join(buildarea, 'vivado.log'), log_dir)
 
     logging.info("adding build configuration: %s", args.config)
