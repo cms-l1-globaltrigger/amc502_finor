@@ -1,18 +1,3 @@
--------------------------------------------------------------------------------
--- Synthesizer : ISE 14.6
--- Platform    : Linux Ubuntu 10.04
--- Targets     : Synthese
---------------------------------------------------------------------------------
--- This work is held in copyright as an unpublished work by HEPHY (Institute
--- of High Energy Physics) All rights reserved.  This work may not be used
--- except by authorized licensees of HEPHY. This work is the
--- confidential information of HEPHY.
---------------------------------------------------------------------------------
----Description: TCM
--- $HeadURL: $
--- $Date: $
--- $Author: ?
--- $Revision: 3796 $
 
 -- JW 2017-08-28: Added cntr_rst signal.
 -- HB 2016-09-19: Removed "resync" and "stop" from port, not used anymore.
