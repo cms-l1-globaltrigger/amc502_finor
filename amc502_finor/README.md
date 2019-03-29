@@ -40,20 +40,20 @@
     curl -L https://github.com/ipbus/ipbb/archive/v0.2.8.tar.gz | tar xvz
     source ipbb-0.2.8/env.sh
 
-    # Create a local working area
-    ipbb init <build_name>
-    cd <build_name>
+    # Create a local working area (proposed directory structure)
+    ipbb init <work dir>/amc502_finor/<mp7fw version>/<build version>
+    cd <work dir>/amc502_finor/<mp7fw version>/<build version>
     ipbb add git https://github.com/ipbus/ipbus-firmware.git -b master
     ipbb add git https://:@gitlab.cern.ch:8443/hbergaue/mp7.git -b mp7fw_v2_4_1_amc502_finor
-    ipbb add git https://:@gitlab.cern.ch:8443/hbergaue/ugt.git -b master
+    ipbb add git https://:@gitlab.cern.ch:8443/hbergaue/ugt.git -b <master or branch name or tag name>
 
     # Patch file top_decl.vhd and copy to ../src/ugt/amc502_finor/firmware/hdl
 
     # Source Vivado
     
     # Create project 
-    ipbb proj create vivado amc502_finor_<build_version> mp7:../ugt/amc502_finor
-    cd proj/amc502_finor_<build_version>
+    ipbb proj create vivado amc502_finor_<build version> mp7:../ugt/amc502_finor
+    cd proj/amc502_finor_<build version>
     ipbb vivado project
 
     # Run implementation, synthesis
