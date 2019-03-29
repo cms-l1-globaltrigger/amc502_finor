@@ -4,7 +4,7 @@
 * A fork of [MP7](https://gitlab.cern.ch/hbergaue/mp7) firmware is available with following branches:
   - branch "mp7fw_v2_4_1_amc502_finor" created from tag mp7fw_v2_4_1.
   - branch "mp7fw_v2_4_3_amc502_finor" created from tag mp7fw_v2_4_3.
-* These branches contain modified MP7 files for amc502_finor:
+* These branches contain modified MP7 files for amc502_finor (files are taken from directory "replacement_files"):
   - boards/mp7/base_fw/mp7_690es/firmware/cfg/mp7_690es.dep
   - boards/mp7/base_fw/mp7_690es/firmware/cfg/mp7_690es.tcl
   - components/mp7_readout/firmware/cfg/mp7_readout.dep
