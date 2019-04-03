@@ -1,4 +1,6 @@
+
 -- Version-history: 
+-- HB 2019-04-03: v1.9.0 (introduced release number for firmware tags)
 -- HB 2019-03-29: comment JW 31.8.2017 0x1012 => introduced cntr reset. Fixed cntr reset address. 
 -- HB 2016-09-28: 0x1010 => based on v100F, but no testpoints. IOB register for finor_in and veto_in, IOB output register for finor_2_tcds (see ../ucf/mp7_null_algo.tcl).
 --                          Inserted "dont_touch" attribute for finor_total_2_out and used neg. edge of clks_aux_0 for output register to get the same conditions for TCDS as with 0x100C.
