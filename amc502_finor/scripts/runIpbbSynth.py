@@ -169,6 +169,7 @@ def main():
     config.set('firmware', 'ugt branch', args.ugt)
     config.set('firmware', 'type', FW_TYPE)
     config.set('firmware', 'buildarea', ipbb_dir)
+    config.set('firmware', 'build', args.build)
 
     config.add_section('device')
     config.set('device', 'type', args.board)
