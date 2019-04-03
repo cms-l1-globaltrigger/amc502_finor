@@ -31,6 +31,18 @@
 
 * The ugt repo is a fork of [svn2git ugt](https://gitlab.cern.ch/cms-cactus/svn2git/firmware/ugt) repo.
 
+### Setup using script ###
+
+    # Run kerberos for outside of CERN network
+    kinit username@CERN.CH
+
+    # Make local clone of ugt repositiory
+    git clone https://gitlab.cern.ch/hbergaue/ugt.git <local path>
+    cd <local path>
+    
+    # Run synthesis script
+    python amc502_finor/scripts/runIpbbSynth.py <vivado version [2018.2]> -t <MP7 tag [mp7fw_v2_4_1]> -p <work dir> -m <menu path> --ugt <ugt master, branch or tag name> -b <build version>
+
 ### Setup ###
 
     # Run kerberos for outside of CERN network
